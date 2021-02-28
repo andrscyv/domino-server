@@ -1,0 +1,13 @@
+{
+  "name": "los_dominos_server",
+  "version": "1.0.0",
+  "description": "server for los dominos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "cp -R ../los_dominos/game ."
+  },
+  "author": "Andrés Cruz",
+  "license": "ISC",
+  "dependencies": {}
+}
