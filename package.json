@@ -5,9 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "cp -R ../los_dominos/game ."
+    "serve": "cp -R ../los_dominos/game . ; node -r esm index.js",
+    "serve_local": "nodemon --watch ../los_dominos/game --watch ./ -r esm index.js"
   },
   "author": "Andrés Cruz",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "boardgame.io": "^0.43.3",
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }

@@ -1,23 +1,26 @@
+// hol
 export const Dominoes = {
   setup: (ctx) => {
     const tiles = buildTiles()
     return {
       tilesByPlayer: dealTiles(ctx.random.Shuffle(tiles)),
-      tilesPlayed: [[2, 3]]
+      tilesPlayed: []
     }
-  },
-  turn: {
-    moveLimit: 1
   },
   moves: {
     playTile: (G, ctx, move) => {
       if (isValidMove(G, move)) {
         nextState(G, { ...move, player: ctx.currentPlayer })
+        ctx.events.endTurn()
       }
     },
     pass: (G, ctx) => {
-
+      ctx.events.endTurn()
+    },
+    chooseFirstPlayer: (G, ctx, firstPlayerId) => {
+      ctx.events.endTurn({ next: firstPlayerId })
     }
+
   },
   endIf: (G, ctx) => {
     for (let i = 0; i < 4; i++) {
@@ -57,7 +60,7 @@ export function nextState (G, { tile, playAtLeftEnd, player }) {
   const { tilesPlayed } = G
 
   if (tilesPlayed.length === 0) {
-    tilesPlayed.push(tile)
+    G.tilesPlayed = [tile]
   } else {
     const suitsAtEnds = getSuitsAtEnds(tilesPlayed)
     const tileToPlay = [...tile]
